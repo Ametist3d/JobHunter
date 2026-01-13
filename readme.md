@@ -94,13 +94,13 @@ Fill in `outreach-backend/.env`.
 ### SMTP (required to send emails)
 
 ```env
-SMTP_HOST=smtp.zoho.eu
+SMTP_HOST=smtp.some.domain
 SMTP_PORT=587
 SMTP_USER=your@email.com
 SMTP_PASS=your_app_password
 
 SMTP_FROM=your@email.com
-SMTP_FROM_NAME=Threedex Studio
+SMTP_FROM_NAME=Your Name
 ```
 
 Notes:
@@ -131,8 +131,7 @@ Unused providers can be left empty.
 ```env
 MAIL_FROM="Your Name <your@email.com>"
 SENDER_NAME=Your Name
-STUDIO_NAME=Threedex Studio
-BASE_OFFER=High-end architectural visualization & AI workflows
+BASE_OFFER=Short description of what you offer
 ```
 
 ---
