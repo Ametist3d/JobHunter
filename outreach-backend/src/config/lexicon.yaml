@@ -1,0 +1,841 @@
+# Lexicon Configuration - Centralized lists for crawling, email extraction, and site context
+
+crawl:
+  # Contact-related keywords (multilingual)
+  tokens_contact:
+    # English
+    - contact
+    - contacts
+    - contact-us
+    - get-in-touch
+    - reach-us
+    - connect
+    
+    # German
+    - kontakt
+    - kontaktieren
+    - kontaktaufnahme
+    - ansprechpartner
+    
+    # French
+    - contactez
+    - contactez-nous
+    - nous-contacter
+    
+    # Spanish
+    - contacto
+    - contactanos
+    - contáctanos
+    - contacte
+    - contactar
+    
+    # Italian
+    - contatti
+    - contatto
+    - contattaci
+    - contattarci
+    
+    # Portuguese
+    - contato
+    - contacto
+    - contate-nos
+    - fale-conosco
+    
+    # Dutch
+    - contacteer
+    - neem-contact-op
+    
+    # Polish
+    - skontaktuj
+    - kontaktuj
+    - kontakt-z-nami
+    
+    # Czech/Slovak
+    - kontaktujte
+    - kontaktujte-nas
+    - kontakty
+    
+    # Hungarian
+    - kapcsolat
+    - kapcsolatfelvetel
+    - elerhetoseg
+    - elérhetőség
+    
+    # Romanian
+    - contacteaza
+    - contactați
+    - contactează
+    
+    # Bulgarian
+    - контакт
+    - контакти
+    - свържете
+    - връзка
+    
+    # Croatian/Serbian/Bosnian
+    - kontaktirajte
+    - kontaktiraj
+    - kontaktirajte-nas
+    
+    # Slovenian
+    - stik
+    
+    # Greek
+    - επικοινωνια
+    - επικοινωνία
+    - επικοινωνηστε
+    - επικοινωνήστε
+    - στοιχεια-επικοινωνιας
+    
+    # Turkish
+    - iletisim
+    - iletişim
+    - iletisim-bilgileri
+    - bize-ulasin
+    - bize-ulaşın
+    
+    # Russian/Ukrainian
+    - контакты
+    - связаться
+    - написать
+    - контакти
+    - зв'язатися
+    - звязатися
+    
+    # Nordic
+    - kontakta
+    - kontakter
+    - ta-kontakt
+    - kontakti
+    - yhteystiedot
+    - ota-yhteytta
+    
+    # Baltic
+    - kontaktai
+    - susisiekite
+    - kontaktid
+    - sazinaties
+    - saziņāties
+    
+    # Japanese
+    - お問い合わせ
+    - お問合せ
+    - 問い合わせ
+    - 連絡先
+    
+    # Chinese
+    - 联系我们
+    - 聯絡我們
+    - 联系方式
+    - 聯絡方式
+    
+    # Korean
+    - 문의
+    - 문의하기
+    - 연락처
+    - 고객센터
+    
+    # Arabic
+    - اتصل
+    - اتصل-بنا
+    - تواصل
+    - تواصل-معنا
+    
+    # Hebrew
+    - צור קשר
+    - יצירת קשר
+    
+    # Hindi
+    - संपर्क
+    - संपर्क करें
+    - हमसे संपर्क
+    
+    # Thai/Vietnamese/Indonesian/Malay
+    - ติดต่อ
+    - ติดต่อเรา
+    - liên-hệ
+    - lien-he
+    - hubungi
+    - hubungi-kami
+    - kontak
+    - kontak-kami
+    - maklum-balas
+    - ugnayan
+    - makipag-ugnayan
+
+  # Job/career keywords (multilingual)
+  job_keywords:
+    # English
+    - career
+    - careers
+    - jobs
+    - job opening
+    - job posting
+    - hiring
+    - we are hiring
+    - join us
+    - join our team
+    - open position
+    - vacancy
+    - work with us
+    - employment
+    - opportunities
+    - apply now
+    - send cv
+    - send resume
+    
+    # German
+    - karriere
+    - stellenangebot
+    - stellenangebote
+    - offene stellen
+    - wir suchen
+    - bewerbung
+    - arbeiten bei
+    - bewerben
+    - stellen
+    - mitarbeiter gesucht
+    
+    # French
+    - carrières
+    - emploi
+    - offres d'emploi
+    - recrutement
+    - rejoignez-nous
+    - postuler
+    
+    # Spanish
+    - carrera
+    - carreras
+    - empleo
+    - ofertas de empleo
+    - vacantes
+    - únete
+    - postular
+    
+    # Italian
+    - carriera
+    - carriere
+    - lavoro
+    - offerte di lavoro
+    - posizioni aperte
+    - candidati
+    
+    # Portuguese
+    - carreira
+    - carreiras
+    - emprego
+    - vagas
+    - oportunidades
+    - junte-se
+    - candidatar
+    
+    # Dutch
+    - carrière
+    - vacatures
+    - werken bij
+    - solliciteren
+    
+    # Polish
+    - kariera
+    - praca
+    - oferty pracy
+    - rekrutacja
+    - dołącz
+    - aplikuj
+    
+    # Czech/Slovak
+    - kariéra
+    - kariéry
+    - práce
+    - volná místa
+    - nabídky práce
+    - přidejte se
+    
+    # Russian/Ukrainian
+    - карьера
+    - работа
+    - вакансии
+    - трудоустройство
+    - присоединяйтесь
+    - кар'єра
+    - робота
+    - вакансії
+    
+    # Japanese
+    - キャリア
+    - 採用
+    - 求人
+    - 募集
+    - 仕事
+    
+    # Chinese
+    - 职业
+    - 招聘
+    - 工作
+    - 加入我们
+    - 應徵
+    
+    # Korean
+    - 채용
+    - 경력
+    - 구인
+    - 입사지원
+
+  # Legal/imprint keywords
+  tokens_legal:
+    # English
+    - imprint
+    - impressum
+    - legal
+    - legal-notice
+    - terms
+    - terms-of-service
+    - privacy
+    - privacy-policy
+    - cookies
+    - gdpr
+    
+    # German
+    - datenschutz
+    - agb
+    - rechtliches
+    
+    # French
+    - mentions-legales
+    - politique-de-confidentialite
+    - confidentialite
+    
+    # Spanish
+    - aviso-legal
+    - terminos
+    - privacidad
+    - politica-de-privacidad
+    
+    # Italian
+    - note-legali
+    - termini
+    - cookie
+    
+    # Portuguese
+    - aviso-legal
+    - termos
+    - privacidade
+    
+    # Dutch
+    - privacybeleid
+    - voorwaarden
+    - cookiebeleid
+    
+    # Polish/Czech/Slovak
+    - polityka-prywatnosci
+    - regulamin
+    - rodo
+    - ochrana-osobnich-udaju
+    - zasady-ochrany
+    
+    # Hungarian/Romanian
+    - adatvedelem
+    - adatkezelesi
+    - politica-de-confidentialitate
+    
+    # Nordic
+    - integritetspolicy
+    - personvern
+    - tietosuoja
+    - dataskydd
+    
+    # Greek/Turkish
+    - όροι
+    - όροι
+    - απόρρητο
+    - απόρρητο
+    - πολιτικη-απορρητου
+    - gizlilik
+    - kvkk
+    - cerez
+    - çerez
+    
+    # Russian/Ukrainian
+    - политика
+    - конфиденциальности
+    - правила
+    - соглашение
+    - політика
+    - конфіденційності
+
+  # About/company keywords
+  tokens_about:
+    # English
+    - about
+    - about-us
+    - company
+    - our-company
+    - who-we-are
+    - team
+    - studio
+    - agency
+    
+    # German
+    - uber-uns
+    - über-uns
+    - unternehmen
+    - firma
+    - profil
+    
+    # French
+    - a-propos
+    - apropos
+    - qui-sommes-nous
+    - societe
+    - equipe
+    
+    # Spanish
+    - sobre
+    - sobre-nosotros
+    - quienes-somos
+    - empresa
+    - equipo
+    
+    # Italian
+    - chi-siamo
+    - azienda
+    - societa
+    
+    # Portuguese
+    - sobre-nos
+    - quem-somos
+    - empresa
+    - equipe
+    
+    # Dutch
+    - over-ons
+    - bedrijf
+    - wie-zijn-wij
+    
+    # Polish/Czech/Slovak
+    - o-nas
+    - o-nás
+    - o-firmie
+    - onas
+    
+    # Hungarian/Romanian
+    - rolunk
+    - rólunk
+    - cegunk
+    - despre-noi
+    - despre
+    - echipa
+    
+    # Balkan/Greek/Turkish
+    - o-nama
+    - tim
+    - σχετικα
+    - σχετικά
+    - εταιρεια
+    - εταιρεία
+    - hakkimizda
+    - hakkımızda
+    - kurumsal
+    
+    # Russian/Ukrainian
+    - о-нас
+    - о-компании
+    - компания
+    - команда
+    - про-нас
+    - про-компанію
+    
+    # Japanese/Chinese/Korean
+    - 会社概要
+    - 企業情報
+    - 私たちについて
+    - 关于我们
+    - 公司介绍
+    - 公司簡介
+    - 關於我們
+    - 회사소개
+    - 기업정보
+    - 소개
+
+  # URL hints (fragments that often contain contact info)
+  url_hints:
+    - contact
+    - contato
+    - contacto
+    - contatti
+    - kontakt
+    - impressum
+    - imprint
+    - legal
+    - privacy
+    - datenschutz
+    - about
+    - team
+    - company
+    - studio
+    - support
+    - help
+    - sales
+    - page_id=
+
+email:
+  # File extensions that shouldn't be treated as emails
+  blocked_extensions:
+    - .png
+    - .jpg
+    - .jpeg
+    - .gif
+    - .svg
+    - .webp
+    - .ico
+    - .pdf
+    - .zip
+    - .rar
+    - .css
+    - .js
+    - .woff
+    - .woff2
+    - .ttf
+    - .eot
+
+  # Domain suffixes that are never real contact emails
+  blocked_domain_suffixes:
+    - sentry.io
+    - sentry.wixpress.com
+    - sentry-next.wixpress.com
+    - wixpress.com
+    - wix.com
+    - cloudflare.com
+    - google.com
+    - googleapis.com
+    - facebook.com
+    - fb.com
+    - instagram.com
+    - twitter.com
+    - x.com
+    - youtube.com
+    - tiktok.com
+    - reddit.com
+    - redditinc.com
+
+  # Usernames that are almost always junk (regex patterns as strings)
+  blocked_user_patterns:
+    - "^[a-f0-9]{20,}$"  # long hex hashes
+    - "^[0-9]{10,}$"      # long numeric IDs
+    - "@2x$"              # retina image marker
+
+  # Common business inboxes (positive signal)
+  good_prefixes:
+    - email
+    - e-mail
+    - mail
+    - inbox
+    - team
+    - info
+    - hello
+    - support
+    - sales
+    - office
+    - studio
+    - customer-service
+    - customer-care
+    # Multilingual
+    - kontakt
+    - contatto
+    - contacto
+    - contato
+    - connect
+    - reach
+    - mailbox
+    - getintouch
+    - почта
+    - емейл
+    - 邮箱
+    - メール
+    - 이메일
+
+  # Reserved/test domains
+  reserved_domains:
+    - example.com
+    - example.net
+    - example.org
+    - test
+    - invalid
+    - localhost
+    - local
+
+  # Fake domains seen in bounces
+  bounce_fake_domains:
+    - primer.com
+    - email.com
+    - someplace.studio
+
+  # Placeholder usernames
+  placeholder_users:
+    - example
+    - email
+    - name
+    - name.surname
+    - yourname
+    - your.email
+    - your.name
+
+  # Free email providers
+  free_email_domains:
+    - gmail.com
+    - outlook.com
+    - hotmail.com
+    - yahoo.com
+    - icloud.com
+    - proton.me
+    - protonmail.com
+    - gmx.com
+
+language:
+  # Language detection stopwords
+  stopwords:
+    de:
+      - und
+      - der
+      - die
+      - das
+      - architektur
+      - büro
+      - projekt
+      - kontakt
+      - impressum
+    en:
+      - and
+      - the
+      - studio
+      - projects
+      - contact
+      - about
+      - architecture
+      - services
+    cs:
+      - a
+      - že
+      - se
+      - na
+      - pro
+      - kontakt
+      - architektura
+      - projekty
+    hr:
+      - i
+      - da
+      - je
+      - za
+      - kontakt
+      - projekti
+      - arhitektura
+    it:
+      - e
+      - che
+      - per
+      - contatti
+      - progetti
+      - architettura
+    fr:
+      - et
+      - que
+      - pour
+      - contact
+      - projets
+      - architecture
+    es:
+      - y
+      - que
+      - para
+      - contacto
+      - proyectos
+      - arquitectura
+    pt:
+      - e
+      - que
+      - para
+      - contato
+      - projetos
+      - arquitetura
+    nl:
+      - en
+      - de
+      - het
+      - voor
+      - contact
+      - projecten
+      - architectuur
+    pl:
+      - i
+      - że
+      - dla
+      - kontakt
+      - projekty
+      - architektura
+    ru:
+      - и
+      - что
+      - для
+      - контакт
+      - проекты
+      - архитектура
+    sk:
+      - a
+      - že
+      - pre
+      - kontakt
+      - projekty
+      - architektúra
+    ro:
+      - și
+      - că
+      - pentru
+      - contact
+      - proiecte
+      - arhitectură
+    bg:
+      - и
+      - че
+      - за
+      - контакт
+      - проекти
+      - архитектура
+    hu:
+      - és
+      - hogy
+      - számára
+      - kapcsolat
+      - projektek
+      - építészet
+    el:
+      - και
+      - που
+      - για
+      - επικοινωνία
+      - έργα
+      - αρχιτεκτονική
+    tr:
+      - ve
+      - için
+      - iletişim
+      - projeler
+      - mimarlık
+    sr:
+      - i
+      - da
+      - za
+      - kontakt
+      - projekti
+      - arhitektura
+
+urls:
+  # Candidate paths to crawl (language-agnostic common paths)
+  candidate_paths:
+    - ""  # homepage
+    # Legal pages
+    - /impressum
+    - /imprint
+    - /legal
+    - /privacy
+    - /datenschutz
+    # Contact/info
+    - /contact
+    - /contact-us
+    - /contacts
+    - /kontakt
+    - /get-in-touch
+    - /info
+    # About/studio
+    - /about
+    - /about-us
+    - /team
+    - /studio
+    - /company
+    - /who-we-are
+    # Services/work
+    - /services
+    - /work
+    - /projects
+    - /portfolio
+
+site_relevance:
+  # Hosts to always exclude
+  blacklist_hosts:
+    - facebook.com
+    - instagram.com
+    - linkedin.com
+    - twitter.com
+    - x.com
+    - youtube.com
+    - tiktok.com
+    - wikipedia.org
+    - pinterest.com
+    - reddit.com
+
+  # Strong negative signals (domain parking/marketplace)
+  strong_negative_keywords:
+    - "domain for sale"
+    - "buy this domain"
+    - "domain parking"
+    - "expired domain"
+    - "coming soon"
+
+  # Negative signals (lower weight)
+  negative_keywords:
+    - marketplace
+    - "buy now"
+    - "for sale"
+    - auction
+    - bidding
+    - expired
+    - parked
+
+  # Positive signals (actual business)
+  positive_keywords:
+    - cgi
+    - 3d
+    - render
+    - rendering
+    - visualization
+    - visualisation
+    - visual
+    - visuals
+    - content
+    - images
+    - animation
+    - still
+    - postproduktion
+    - post-production
+    - studio
+    - agency
+    - büro
+    - office
+    - portfolio
+    - projects
+    - projekt
+    - referenzen
+    - architektur
+    - architecture
+    - innenarchitektur
+    - interior
+    - interiors
+    - planung
+    - product
+    - products
+    - produkt
+    - produkte
+    - packshot
+    - e-commerce
+    - ecommerce
+    - shop
+    - store
+    - catalog
+    - fashion
+    - apparel
+    - clothing
+    - mode
+    - lookbook
+    - collection
+    - campaign

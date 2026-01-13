@@ -1,0 +1,36 @@
+# Add proper .gitignore rules
+cat > .gitignore << 'EOF'
+# Node / TS
+node_modules/
+dist/
+build/
+
+# Env & secrets
+.env
+.env.*
+*.env
+!.env.example
+.env.local
+.env.development
+.env.production
+
+# Runtime data
+data/
+*.log
+*.json
+*.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python / misc
+__pycache__/
+*.pyc
+EOF
+
+# Commit the .gitignore update
+git add .gitignore
+git commit -m "Update .gitignore to exclude .env files"
