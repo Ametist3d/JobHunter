@@ -1,16 +1,6 @@
-import FormData from "form-data";
-import fs from "fs";
-import fetch from "node-fetch";
-
-// Mailgun config
-const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN;
-const MAILGUN_API_KEY = process.env.MAILGUN_API_PASS;
-const MAILGUN_FROM = process.env.MAILGUN_FROM || `postmaster@${MAILGUN_DOMAIN}`;
-
-// Brevo config (fallback)
-const BREVO_API_KEY = process.env.BREVO_API_KEY;
-const BREVO_FROM_EMAIL = process.env.BREVO_FROM_EMAIL || "noreply@threedex.ai";
-const BREVO_FROM_NAME = process.env.BREVO_FROM_NAME || "Threedex Studio";
+// outreach-backend/src/email/mailer.ts
+import nodemailer from "nodemailer";
+import fs from "node:fs";
 
 export type SendMailInput = {
   to: string;
@@ -20,137 +10,82 @@ export type SendMailInput = {
   attachmentPath?: string;
 };
 
-// Track if Mailgun limit was hit this session
-let mailgunLimitHit = false;
-
-async function sendViaMailgun(input: SendMailInput) {
-  if (!MAILGUN_DOMAIN || !MAILGUN_API_KEY) {
-    throw new Error("Mailgun env vars missing");
-  }
-
-  const form = new FormData();
-  form.append("from", MAILGUN_FROM);
-  form.append("to", input.to);
-  form.append("subject", input.subject);
-
-  if (input.html) {
-    form.append("html", input.html);
-  } else {
-    form.append("text", input.text);
-  }
-
-  if (input.attachmentPath && fs.existsSync(input.attachmentPath)) {
-    form.append("attachment", fs.createReadStream(input.attachmentPath));
-  }
-
-  form.append("o:tracking", "no");
-  form.append("o:tracking-clicks", "no");
-  form.append("o:tracking-opens", "yes");
-
-  const res = await fetch(
-    `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: "Basic " + Buffer.from(`api:${MAILGUN_API_KEY}`).toString("base64"),
-      },
-      body: form as any,
-    }
-  );
-
-  const bodyText = await res.text();
-
-  // Check for daily limit error
-  if (!res.ok) {
-    const isLimitError =
-      res.status === 429 ||
-      bodyText.toLowerCase().includes("limit") ||
-      bodyText.toLowerCase().includes("quota");
-
-    if (isLimitError) {
-      mailgunLimitHit = true;
-      throw new Error("MAILGUN_LIMIT_REACHED");
-    }
-    throw new Error(`Mailgun error ${res.status}: ${bodyText}`);
-  }
-
-  try {
-    return { ...JSON.parse(bodyText), provider: "mailgun" };
-  } catch {
-    return { message: bodyText, provider: "mailgun" };
-  }
+function requireEnv(name: string): string {
+  const v = process.env[name];
+  if (!v) throw new Error(`Missing env var: ${name}`);
+  return v;
 }
 
-async function sendViaBrevo(input: SendMailInput) {
-  if (!BREVO_API_KEY) {
-    throw new Error("BREVO_API_KEY missing");
-  }
+function boolEnv(name: string, fallback: boolean) {
+  const v = process.env[name];
+  if (v == null) return fallback;
+  return ["1", "true", "yes", "on"].includes(String(v).toLowerCase());
+}
 
-  const payload: any = {
-    sender: { name: BREVO_FROM_NAME, email: BREVO_FROM_EMAIL },
-    to: [{ email: input.to }],
-    subject: input.subject,
-  };
+function intEnv(name: string, fallback: number) {
+  const v = process.env[name];
+  if (!v) return fallback;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : fallback;
+}
 
-  if (input.html) {
-    payload.htmlContent = input.html;
-  } else {
-    payload.textContent = input.text;
-  }
+let cachedTransport: nodemailer.Transporter | null = null;
 
-  // Brevo attachments require base64
-  if (input.attachmentPath && fs.existsSync(input.attachmentPath)) {
-    const content = fs.readFileSync(input.attachmentPath);
-    const filename = input.attachmentPath.split("/").pop() || "attachment";
-    payload.attachment = [{ content: content.toString("base64"), name: filename }];
-  }
+function getTransport() {
+  if (cachedTransport) return cachedTransport;
 
-  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      "api-key": BREVO_API_KEY,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+  const host = requireEnv("SMTP_HOST");
+  const port = intEnv("SMTP_PORT", 587);
+  const secure = boolEnv("SMTP_SECURE", port === 465); // true for 465, false for 587 typically
+
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  cachedTransport = nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: user && pass ? { user, pass } : undefined,
   });
 
-  const bodyText = await res.text();
-
-  if (!res.ok) {
-    throw new Error(`Brevo error ${res.status}: ${bodyText}`);
-  }
-
-  try {
-    return { ...JSON.parse(bodyText), provider: "brevo" };
-  } catch {
-    return { message: bodyText, provider: "brevo" };
-  }
+  return cachedTransport;
 }
 
 export async function sendEmail(input: SendMailInput) {
-  // If Mailgun limit already hit this session, go straight to Brevo
-  if (mailgunLimitHit && BREVO_API_KEY) {
-    console.log("[Mailer] Using Brevo (Mailgun limit previously hit)");
-    return sendViaBrevo(input);
-  }
+  const transport = getTransport();
 
-  // Try Mailgun first (if configured)
-  if (MAILGUN_DOMAIN && MAILGUN_API_KEY) {
-    try {
-      return await sendViaMailgun(input);
-    } catch (e: any) {
-      if (e.message === "MAILGUN_LIMIT_REACHED" && BREVO_API_KEY) {
-        console.log("[Mailer] Mailgun limit reached, falling back to Brevo");
-        return sendViaBrevo(input);
-      }
-      throw e;
+  const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER || requireEnv("SMTP_FROM");
+  const fromName = process.env.SMTP_FROM_NAME || "";
+  const from = fromName ? `${fromName} <${fromEmail}>` : fromEmail;
+
+  const attachments: NonNullable<
+    nodemailer.SendMailOptions["attachments"]
+  > = [];
+
+  if (input.attachmentPath) {
+    if (!fs.existsSync(input.attachmentPath)) {
+      throw new Error(`Attachment not found: ${input.attachmentPath}`);
     }
+    attachments.push({
+      filename: input.attachmentPath.split(/[\\/]/).pop() || "attachment",
+      path: input.attachmentPath,
+    });
   }
 
-  // Fallback to Brevo if Mailgun not configured
-  if (BREVO_API_KEY) {
-    return sendViaBrevo(input);
-  }
+  const info = await transport.sendMail({
+    from,
+    to: input.to,
+    subject: input.subject,
+    text: input.text,
+    html: input.html,
+    attachments: attachments.length ? attachments : undefined,
+  });
 
-  throw new Error("No email provider configured (need MAILGUN or BREVO)");
+  return {
+    provider: "smtp",
+    messageId: info.messageId,
+    accepted: info.accepted,
+    rejected: info.rejected,
+    response: info.response,
+  };
 }
