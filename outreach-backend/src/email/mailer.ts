@@ -57,6 +57,7 @@ export async function sendEmail(input: SendMailInput) {
   const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER || requireEnv("SMTP_FROM");
   const fromName = process.env.SMTP_FROM_NAME || "";
   const from = fromName ? `${fromName} <${fromEmail}>` : fromEmail;
+  const replyTo = process.env.SMTP_USER;
 
   const attachments: NonNullable<
     nodemailer.SendMailOptions["attachments"]
@@ -78,6 +79,7 @@ export async function sendEmail(input: SendMailInput) {
     subject: input.subject,
     text: input.text,
     html: input.html,
+    replyTo, 
     attachments: attachments.length ? attachments : undefined,
   });
 
@@ -89,3 +91,4 @@ export async function sendEmail(input: SendMailInput) {
     response: info.response,
   };
 }
+

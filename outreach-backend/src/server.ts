@@ -308,7 +308,6 @@ async function main() {
   }
 });
 
-// Add job keywords constant at top of server.ts
 const JOB_KEYWORDS = [
   "career", "careers", "jobs", "hiring", "vacancy", "vacancies",
   "open position", "job opening", "work with us", "join us",

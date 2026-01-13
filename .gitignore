@@ -1,5 +1,3 @@
-# Add proper .gitignore rules
-cat > .gitignore << 'EOF'
 # Node / TS
 node_modules/
 dist/

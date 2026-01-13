@@ -24,6 +24,12 @@ const PROVIDER_LABELS: Record<string, string> = {
   perplexity: "ppl",
 };
 
+const toFormData = (s: JobSchedule): Partial<JobScheduleFormData> => ({
+  ...s,
+  // normalize null -> undefined for the form
+  nextRunAt: s.nextRunAt ?? undefined,
+});
+
 export default function JobSchedulesPanel() {
   const [schedules, setSchedules] = useState<JobSchedule[]>([]);
   const [loading, setLoading] = useState(true);
@@ -215,7 +221,7 @@ export default function JobSchedulesPanel() {
 
       <JobScheduleModal
         open={modalOpen}
-        initialData={editingSchedule || undefined}
+        initialData={editingSchedule ? toFormData(editingSchedule) : undefined}
         onClose={() => { setModalOpen(false); setEditingSchedule(null); }}
         onSave={handleSave}
       />
